@@ -1,0 +1,6 @@
+---
+- name: Ping Test
+  hosts: database_servers,app_servers,load_balancers
+  tasks:
+    - name: Task - Ping
+      ping:

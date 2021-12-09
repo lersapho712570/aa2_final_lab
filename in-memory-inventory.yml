@@ -1,0 +1,35 @@
+---
+- name: Gather OSP
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    guid: "{{ lookup('ENV','GUID') }}"
+    home: "{{ lookup('ENV','HOME') }}"
+    internal_domain: "example.com"
+  tasks:
+    - name: Collection instance info
+      os_server_info:
+      register: instances
+
+    - name: Build In-Memory inventory
+      add_host:
+        host: "{{ instance.name }}.{{ internal_domain }}"
+        ansible_user: cloud-user
+        group: "{{ instance.metadata.AnsibleGroup }}"
+        ansible_host: "{{ instance.private_v4 }}"
+        ssh_private_key_file: "{{ home }}/.ssh/{{ guid }}key.pem"
+      when: instance.metadata.AnsibleGroup == "load_balancers" or instance.metadata.AnsibleGroup == "app_servers" or instance.metadata.AnsibleGroup == "database_servers"
+      loop: "{{ instances.openstack_servers }}"
+      loop_control:
+        loop_var: instance
+
+    - name: Set Fact For Frontend1 IP Address
+      set_fact:
+        frontend1: "{{ myvar.private_v4 }}"
+      when: myvar.metadata.AnsibleGroup == "load_balancers"
+      loop: "{{ instances.openstack_servers }}"
+      loop_control:
+        loop_var: myvar
+
+
