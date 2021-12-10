@@ -1,11 +1,10 @@
 ---
+- import_playbook: in-memory-inventory.yml
+
 - name: Remove OpenStack Instances
-  hosts: localhost
+  hosts: controls
   connection: local
   gather_facts: false
-  roles:
-    - role: infra
-      tags: destroy
   tasks:
     - include_role:
          name: infra
