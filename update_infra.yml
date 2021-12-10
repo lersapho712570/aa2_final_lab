@@ -2,14 +2,13 @@
 - import_playbook: in-memory-inventory.yml
 
 - name: Play to automate process
-  hosts: app_servers,database_servers,load_balancers
+  hosts: database_servers,app_servers,load_balancers
   become: yes
-  gather_facts: false
+  vars_files:
+    - userdata.yml
   vars:
     satellite_activationkey: gpte-labs-rhel8
     satellite_org: prod
-  vars_files:
-    - dns_server.yml
   tasks:
     - name: DNS IP updated
       lineinfile:
@@ -18,7 +17,8 @@
         line: "{{ item }}"
       loop:
         - PEERDNS=no
-        - DNS1= "{{ dns1 }}"
+        - DNS1={{ dns1 }}
+        - DNS2={{ dns2 }}
       register: network_update
 
     - name: restart network manager
@@ -44,3 +44,5 @@
       yum:
         name: firewalld
         state: latest
+
+
