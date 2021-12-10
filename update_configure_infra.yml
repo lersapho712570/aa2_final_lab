@@ -4,6 +4,7 @@
 - name: Play to automate process
   hosts: all
   become: true
+  gather_facts: false
   vars:
     satellite_activationkey: gpte-labs-rhel8
     satellite_org: prod
