@@ -21,6 +21,10 @@
       set_fact:
         dns1: "{{ local_facts.ansible_facts.ansible_default_ipv4.address }}"
 
+    - name: Print Log FIrst
+      debug:
+        msg: "{{ dns1 }}"
+
 
 - name: Play Import and Print DNS Server IP
   hosts: localhost
