@@ -1,6 +1,8 @@
 ---
+- import_playbook: in-memory-inventory.yml
+
 - name: Create OpenStack Instances
-  hosts: localhost
+  hosts: controls 
   connection: local
   gather_facts: false
   tasks:
