@@ -3,7 +3,7 @@
 
 - name: Teardown haproxy load balancer
   hosts: load_balancers
-  gather_facts: false 
+  gather_facts: false
   become: true
 
   vars:
@@ -24,5 +24,4 @@
       file:
         path: /etc/haproxy/haproxy.cfg
         state: absent
-
 

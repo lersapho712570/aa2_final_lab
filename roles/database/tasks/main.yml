@@ -14,7 +14,7 @@
 
 - name: Check if Postgres initialized
   stat:
-    path: "{{ postgres_10_data_dir }}"
+    path: "{{ postgres_12_data_dir }}/postgresql.conf"
   register: r_postgres_init_dir_state
 
 - when: not r_postgres_init_dir_state.stat.exists
@@ -25,12 +25,12 @@
 - name: Setup Postgres for remote password auth
   template:
     src: pg_hba.conf.j2
-    dest: "{{ postgres_10_data_dir }}/pg_hba.conf"
+    dest: "{{ postgres_12_data_dir }}/pg_hba.conf"
   notify: restart_postgres
 
 - name: Setup Postgres to listen on network interfaces
   lineinfile:
-    dest: "{{ postgres_10_data_dir }}/postgresql.conf"
+    dest: "{{ postgres_12_data_dir }}/postgresql.conf"
     line: "listen_addresses = '*'"
     insertafter: "#listen_addresses"
   notify: restart_postgres

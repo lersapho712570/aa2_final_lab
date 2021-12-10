@@ -7,8 +7,8 @@ postgres_packages:
   - postgresql-contrib
   - postgresql-libs
 postgres_library: python3-psycopg2
-postgres_10_data_dir: /var/lib/pgsql/data/
-postgres_10_bin_path: /usr/pgsql-12/bin
+postgres_12_data_dir: /var/lib/pgsql/data
+postgres_12_bin_path: /usr/pgsql-12/bin
 postgres_service: postgresql
 postgres_port: 5432
 postgres_user: postgres
