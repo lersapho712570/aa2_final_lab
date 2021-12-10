@@ -1,5 +1,6 @@
 ---
-- import_playbook: in-memory-inventory
+- import_playbook: in-memory-inventory.yml
+
 - name: Teardown Postgres 12
   hosts: database_servers
   become: true
@@ -68,7 +69,6 @@
 
     pip_dependencies:
        - virtualenv
-      # - pip
        - psycopg2-binary==2.8.6
 
   tasks:
@@ -90,7 +90,6 @@
                 name: "{{ flask_app_name }}.service"
                 state: stopped
                 enabled: no
-#              ignore_errors: yes
 
             - name: Remove systemd flask app service file
               file:
@@ -107,7 +106,6 @@
         name: "{{ pip_dependencies }}"
         state: absent
         executable: /usr/bin/pip3
-          #      ignore_errors: yes
 
     - name: Remove flask user
       user:
