@@ -1,0 +1,18 @@
+---
+- name: Play to automate process
+  hosts: localhost 
+  become: true
+  gather_facts: false
+  vars:
+    satellite_activationkey: gpte-labs-rhel8
+    satellite_org: prod
+    #hostvars.localhost.ansible_default_ipv4.address: "192.168.50.105"
+  tasks:
+    - name: Gather network facts
+      setup:
+        gather_subset:
+          - 'network'
+      delegate_facts: true
+      delegate_to: localhost
+      connection: local
+
