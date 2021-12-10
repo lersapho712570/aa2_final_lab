@@ -1,5 +1,5 @@
 ---
-- import_playbook: in-memory-inventory.yml
+#- import_playbook: in-memory-inventory.yml
 
 - name: Create OpenStack Instances
   hosts: controls 
