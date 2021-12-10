@@ -1,0 +1,7 @@
+- name: Remove Instance
+  openstack.cloud.server:
+    name: "{{ instance.name }}"
+    state: absent
+  loop: "{{ instances }}"
+  loop_control:
+    loop_var: instance

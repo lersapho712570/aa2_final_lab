@@ -3,5 +3,7 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  roles:
-    - infra
+  tasks:
+    - include_role:
+        name: infra
+        tasks_from: main

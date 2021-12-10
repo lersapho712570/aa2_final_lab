@@ -1,0 +1,12 @@
+---
+- name: Remove OpenStack Instances
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - role: infra
+      tags: destroy
+  tasks:
+    - include_role:
+         name: infra
+         tasks_from: destroy

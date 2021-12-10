@@ -1,7 +1,5 @@
 ---
 # tasks file for roles/infra
-- name: Include Instance variables
-  include_vars: instances_vars.yml
 
 - name: Create Instance
   openstack.cloud.server:
@@ -19,4 +17,5 @@
   loop: "{{ instances }}"
   loop_control:
     loop_var: instance
+
 
