@@ -1,2 +1,4 @@
 ---
 # defaults file for roles/infra
+guid: "{{ lookup('ENV','GUID') }}"
+
