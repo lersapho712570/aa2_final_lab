@@ -2,7 +2,7 @@
 - import_playbook: in-memory-inventory.yml
 
 - name: Play to automate process
-  hosts: bastions
+  hosts: bastions,controls 
   gather_facts: false
   vars:
     satellite_activationkey: gpte-labs-rhel8
