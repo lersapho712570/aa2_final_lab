@@ -1,5 +1,6 @@
 ---
 - import_playbook: in-memory-inventory.yml
+
 - name: Play to automate process
   hosts:  controls
   become: true
