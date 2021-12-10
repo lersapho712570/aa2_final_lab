@@ -3,7 +3,7 @@
 
 - name: Create OpenStack Instances
   hosts: controls 
-  connection: local
+  connection: ssh
   gather_facts: false
   tasks:
     - include_role:
