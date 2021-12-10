@@ -2,7 +2,7 @@
 - import_playbook: in-memory-inventory.yml
 
 - name: Play to automate process
-  hosts: controls
+  hosts: bastions
   gather_facts: false
   vars:
     satellite_activationkey: gpte-labs-rhel8
@@ -17,15 +17,9 @@
       connection: ssh
       register: local_facts
 
-    - name: Print Log
-      debug: 
-        msg: "{{ local_facts.ansible_facts.ansible_default_ipv4.address }}"
-
-    - name: Create File
-      copy:
-        content: |
-          dns1: "{{ local_facts.ansible_facts.ansible_default_ipv4.address }}" 
-        dest: ./dns_server.yml
+    - name: Set Fact
+      set_fact:
+        dns1: "{{ local_facts.ansible_facts.ansible_default_ipv4.address }}"
 
 
 - name: Play Import and Print DNS Server IP
@@ -34,6 +28,16 @@
   vars_files:
     - dns_server.yml
   tasks:
+    - name: Print Log
+      debug:
+        msg: "{{ dns1 }}"
+
+    - name: Create File
+      copy:
+        content: |
+          dns1: "{{ dns1 }}"
+        dest: ./dns_server.yml
+
     - name: Print DNS Server
       debug:
         msg: "{{ dns1 }}"
