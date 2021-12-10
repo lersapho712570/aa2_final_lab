@@ -13,15 +13,25 @@
       #delegate_facts: true
       delegate_to: localhost
       connection: ssh
-      register: champ023
+      register: local_facts
 
-    - name: Print
+    - name: Print Log
       debug: 
-        msg: "{{ champ023.ansible_facts.ansible_default_ipv4.address }}"
+        msg: "{{ local_facts.ansible_facts.ansible_default_ipv4.address }}"
 
     - name: Create File
       copy:
         content: |
-          frontend1: "192.168.1.1" 
-          app: "192.168.1.20"
+          dns1: "{{ local_facts.ansible_facts.ansible_default_ipv4.address }}" 
         dest: ./dns_server.yml
+
+
+- name: Play Import and Print DNS Server IP
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - dns_server.yml
+  tasks:
+    - name: Print DNS Server
+      debug:
+        msg: "{{ dns1 }}"

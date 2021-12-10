@@ -8,15 +8,9 @@
   vars:
     satellite_activationkey: gpte-labs-rhel8
     satellite_org: prod
+  vars_files:
+    - dns_server.yml
   tasks:
-    - name: Gather network facts
-      setup:
-        gather_subset:
-          - 'network'
-      delegate_facts: true
-      delegate_to: localhost
-      connection: ssh 
-
     - name: DNS IP updated
       lineinfile:
         state: present
@@ -24,7 +18,7 @@
         line: "{{ item }}"
       loop:
         - PEERDNS=no
-        - DNS1= "{{ hostvars.localhost.ansible_default_ipv4.address }}"
+        - DNS1= "{{ dns1 }}"
       register: network_update
 
     - name: restart network manager
