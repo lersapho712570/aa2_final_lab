@@ -1,0 +1,28 @@
+---
+- import_playbook: in-memory-inventory.yml
+
+- name: Teardown haproxy load balancer
+  hosts: load_balancers
+  gather_facts: false 
+  become: true
+
+  vars:
+    load_balancer_packages:
+      - haproxy
+
+  tags:
+    - load_balancers
+
+  tasks:
+
+    - name: Remove load balancer packages
+      package:
+        name: "{{ load_balancer_packages }}"
+        state: absent
+
+    - name: configure haproxy
+      file:
+        path: /etc/haproxy/haproxy.cfg
+        state: absent
+
+

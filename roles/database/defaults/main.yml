@@ -1,6 +1,6 @@
 ---
 # defaults file for roles/database
-postgres_rhel7_repo: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
+postgres_rhel_repo: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
 postgres_packages:
   - postgresql
   - postgresql-server
