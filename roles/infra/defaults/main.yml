@@ -1,6 +1,7 @@
 ---
 # defaults file for roles/infra
 #guid: "{{ lookup('ENV','GUID') }}"
+guid: 5f64
 
 instances:
   - name: frontend1
