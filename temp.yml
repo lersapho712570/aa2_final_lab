@@ -1,11 +1,15 @@
 - name: Play Test
   hosts: localhost
-  gather_facts: false
+  gather_facts: yes
   become: true
   vars:
     guid: "{{ lookup('ENV','GUID') }}"
     jom: "{{ lookup('ENV','JOM') }}"
   tasks:
+    - name: Print Fact
+      debug:
+        var=ansible_facts 
+
     - name: Print GUID
       debug:
         var=guid
