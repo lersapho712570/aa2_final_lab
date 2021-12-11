@@ -3,7 +3,7 @@
 
 - name: Remove OpenStack Instances
   hosts: controls
-  connection: local
+  #connection: local
   gather_facts: false
   collections:
     - openstack
