@@ -1,6 +1,3 @@
----
-#- import_playbook: in-memory-inventory.yml
-
 - name: Create OpenStack Instances
   hosts: controls 
   connection: ssh
