@@ -1,0 +1,16 @@
+- name: Play Test
+  hosts: localhost
+  gather_facts: false
+  become: true
+  vars:
+    guid: "{{ lookup('ENV','GUID') }}"
+    jom: "{{ lookup('ENV','JOM') }}"
+  tasks:
+    - name: Print GUID
+      debug:
+        var=guid
+
+    - name: Print JOM
+      debug:
+        var=jom
+
