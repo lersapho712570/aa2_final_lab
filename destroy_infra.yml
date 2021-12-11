@@ -5,6 +5,8 @@
   hosts: controls
   connection: local
   gather_facts: false
+  collections:
+    - openstack
   tasks:
     - include_role:
          name: infra
