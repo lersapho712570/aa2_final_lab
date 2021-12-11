@@ -1,6 +1,5 @@
 - name: Create OpenStack Instances
   hosts: controls 
-  connection: ssh
   gather_facts: false
   collections:
     - openstack

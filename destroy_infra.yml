@@ -1,6 +1,5 @@
 - name: Remove OpenStack Instances
   hosts: controls
-  connection: ssh 
   gather_facts: false
   collections:
     - openstack
